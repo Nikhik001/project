@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School Board Result Analysis</title>
+<style>
+:root{--navy:#142b4a;--blue:#2459a9;--ink:#172235;--muted:#637187;--line:#dce4ee;--bg:#f4f7fb;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Arial,Helvetica,sans-serif}
+header{background:linear-gradient(120deg,#102642,#2459a9);color:white;padding:48px 22px}
+.wrap{max-width:1100px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:bold;color:#cbdcf6}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin:.6rem 0}header p{max-width:720px;color:#e1eafa;font-size:1.08rem}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}nav a{color:white;text-decoration:none;border:1px solid #ffffff66;border-radius:10px;padding:9px 13px}
+main{max-width:1100px;margin:28px auto;padding:0 18px 50px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:24px;margin:18px 0;box-shadow:0 8px 25px #16345a0a}
+h2{margin:0 0 10px;font-size:1.45rem}.muted{color:var(--muted)}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:18px}.step{background:#f7f9fc;border:1px solid var(--line);border-radius:12px;padding:16px}.num{width:32px;height:32px;border-radius:9px;background:#e6efff;color:#174a98;display:grid;place-items:center;font-weight:bold;margin-bottom:8px}
+details{border:1px solid var(--line);border-radius:12px;overflow:hidden}summary{padding:14px 16px;cursor:pointer;background:#f7f9fc;font-weight:bold}
+pre{margin:0;padding:18px;overflow:auto;background:#101b2b;color:#e7efff;font:13px/1.6 Consolas,Monaco,monospace;max-height:480px;white-space:pre}
+label{display:block;font-weight:bold;margin:16px 0 7px}textarea{width:100%;min-height:240px;padding:14px;border:1px solid #bdcadb;border-radius:12px;font:14px/1.5 Consolas,monospace;resize:vertical}
+select,button{font:inherit;border-radius:10px;padding:11px 14px}select{border:1px solid #bdcadb;background:white}button{border:0;background:var(--blue);color:white;font-weight:bold;cursor:pointer}button:disabled{opacity:.6;cursor:wait}.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:15px}
+.notice{padding:12px 14px;background:#fff8e7;border:1px solid #f0d79b;border-radius:10px;color:#74520b;font-size:.92rem;margin-top:14px}
+.status{margin-top:14px;white-space:pre-wrap}.table-wrap{overflow:auto;margin-top:16px}table{border-collapse:collapse;width:100%;min-width:650px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}th{background:#eef3fa;color:#233c5d}tr:hover td{background:#fafcff}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px}.stat{background:#f7f9fc;border:1px solid var(--line);border-radius:12px;padding:15px}.stat strong{display:block;font-size:1.55rem;color:#174a98}.hidden{display:none}
+footer{text-align:center;color:var(--muted);padding:25px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">School project · Examination insights</div>
+    <h1>Board Result Analysis</h1>
+    <p>A simple workspace for processing Class 10 and Class 12 result text, running the provided Python program, and viewing its CSV output.</p>
+    <nav><a href="#intro">Introduction</a><a href="#code">See the code</a><a href="#input">Input text</a><a href="#results">Results</a></nav>
+  </div>
+</header>
+<main>
+  <section class="card" id="intro">
+    <h2>Welcome</h2>
+    <p class="muted">This project takes the text normally stored in <code>kk.py</code>, passes it to the original program, and shows the generated <code>students.csv</code>. The original program's calculations and sorting statement are kept unchanged.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><b>See the code</b><div class="muted">Review the original Python script.</div></div>
+      <div class="step"><div class="num">2</div><b>Paste text</b><div class="muted">Paste the text file's contents in the box.</div></div>
+      <div class="step"><div class="num">3</div><b>Run program</b><div class="muted">The server runs the original <code>ss.py</code>.</div></div>
+      <div class="step"><div class="num">4</div><b>View CSV</b><div class="muted">Inspect and download the generated result.</div></div>
+    </div>
+    <div class="notice">The pasted text must match the format expected by your original code: each student record line is followed by a marks line, with six marks in the expected positions. Your original code sorts in descending order using <code>d.sort(reverse=True)</code>.</div>
+  </section>
+
+  <section class="card" id="code">
+    <h2>See the original code</h2>
+    <p class="muted">This is the uploaded <code>ss.py</code> script, shown without editing its contents.</p>
+    <details>
+      <summary>Show / hide original ss.py</summary>
+      <pre id="sourceCode">Loading original code…</pre>
+    </details>
+  </section>
+
+  <section class="card" id="input">
+    <h2>Paste your text-file contents</h2>
+    <p class="muted">Open your text file, copy all its contents, and paste them below.</p>
+    <label for="classChoice">Class</label>
+    <select id="classChoice"><option>Class 10</option><option>Class 12</option></select>
+    <label for="inputText">Text data</label>
+    <textarea id="inputText" placeholder="Paste the complete contents of your text file here…"></textarea>
+    <div class="row">
+      <button id="runBtn" type="button">Run original code</button>
+      <button id="clearBtn" type="button" style="background:#e8edf5;color:#1b2c45">Clear text</button>
+    </div>
+    <div id="status" class="status muted" role="status"></div>
+  </section>
+
+  <section class="card" id="results">
+    <h2>Processed result</h2>
+    <p class="muted">The table below comes from the CSV file created by your original Python program.</p>
+    <div id="stats" class="stats hidden"></div>
+    <div class="table-wrap" id="tableWrap"><p class="muted">Your results will appear here after you run the code.</p></div>
+    <div class="row"><a id="downloadLink" class="hidden" href="/download" style="text-decoration:none"><button type="button">Download students.csv</button></a></div>
+  </section>
+</main>
+<footer>School Board Result Analysis · Demonstration project</footer>
+<script>
+const sourceCode = document.getElementById('sourceCode');
+const inputText = document.getElementById('inputText');
+const runBtn = document.getElementById('runBtn');
+const statusBox = document.getElementById('status');
+const tableWrap = document.getElementById('tableWrap');
+const stats = document.getElementById('stats');
+const downloadLink = document.getElementById('downloadLink');
+
+fetch('/source').then(r => r.text()).then(t => sourceCode.textContent = t)
+  .catch(() => sourceCode.textContent = 'Could not load ss.py source.');
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  inputText.value = ''; statusBox.textContent = '';
+});
+runBtn.addEventListener('click', async () => {
+  const text = inputText.value;
+  if (!text.trim()) { statusBox.textContent = 'Please paste your text-file contents first.'; return; }
+  runBtn.disabled = true; runBtn.textContent = 'Running…';
+  statusBox.textContent = 'Running your original Python program…';
+  stats.classList.add('hidden'); downloadLink.classList.add('hidden');
+  try {
+    const response = await fetch('/run', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({text, schoolClass: document.getElementById('classChoice').value})
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Could not process this text.');
+    statusBox.textContent = data.message || 'Completed.';
+    renderTable(data.rows);
+    renderStats(data.rows);
+    downloadLink.classList.remove('hidden');
+    document.getElementById('results').scrollIntoView({behavior:'smooth'});
+  } catch (e) {
+    statusBox.textContent = 'Error: ' + e.message;
+    tableWrap.innerHTML = '<p class="muted">No results to display.</p>';
+  } finally { runBtn.disabled = false; runBtn.textContent = 'Run original code'; }
+});
+function renderTable(rows) {
+  if (!rows || !rows.length) { tableWrap.innerHTML = '<p>No rows were returned by the program.</p>'; return; }
+  const wrap = document.createElement('div');
+  const table = document.createElement('table');
+  rows.forEach((row, ri) => {
+    const tr = document.createElement('tr');
+    row.forEach(cell => {
+      const el = document.createElement(ri === 0 ? 'th' : 'td');
+      el.textContent = cell; tr.appendChild(el);
+    });
+    table.appendChild(tr);
+  });
+  wrap.appendChild(table); tableWrap.replaceChildren(wrap);
+}
+function renderStats(rows) {
+  if (!rows || rows.length < 2) return;
+  const header = rows[0], totalIndex = header.indexOf('Total');
+  const totals = rows.slice(1).map(r => Number(r[totalIndex])).filter(Number.isFinite);
+  if (!totals.length) return;
+  const avg = totals.reduce((a,b)=>a+b,0)/totals.length;
+  const highest = Math.max(...totals);
+  const items = [['Students', totals.length], ['Highest total', highest], ['Average total', avg.toFixed(2)]];
+  stats.replaceChildren();
+  items.forEach(([label,value]) => {
+    const div = document.createElement('div'); div.className='stat';
+    const strong = document.createElement('strong'); strong.textContent=value;
+    const small = document.createElement('span'); small.textContent=label;
+    div.append(strong,small); stats.appendChild(div);
+  });
+  stats.classList.remove('hidden');
+}
+</script>
+</body>
+</html>
